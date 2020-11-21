@@ -1,40 +1,29 @@
 package project.worklogs;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import project.worklogs.controller.MainView;
 import project.worklogs.model.Task;
 import project.worklogs.model.WorkLog;
+import project.worklogs.service.MainViewService;
 import project.worklogs.service.ObjectsListFromJSON;
+import project.worklogs.service.PickedOptionViewService;
+import project.worklogs.service.StatisticsFromData;
 
-import java.io.*;
 import java.util.List;
 
 @SpringBootApplication
 public class WorklogsApplication {
 
-	public static void main(String[] args) throws IOException {
 
-//		SpringApplication.run(WorklogsApplication.class, args);
-//		ObjectsListFromJSON objectsListFromJSON = new ObjectsListFromJSON();
-//		try{
-//		List<Task> tasks = objectsListFromJSON.getTasksFromJSON("tasks_java.txt");
-//		List<WorkLog> workLogs = objectsListFromJSON.getWorkLogsFromJSON("worklogs_Java.txt");
-//			for (Task t: tasks) {
-//				System.out.println(t.getCategory());
-//			}
-//			for (WorkLog t: workLogs) {
-//				System.out.println(t.getAuthor());
-//			}
-//		}catch (Exception e){
-//			e.printStackTrace();
-//		}
-
-//		try{
-//			tasks = new ObjectMapper().readerFor(Task.class).readValue(new File("tasks_java.txt"));
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-
+	public static void main(String[] args) {
+		ObjectsListFromJSON objectsListFromJSON = new ObjectsListFromJSON();
+		StatisticsFromData statisticsFromData = new StatisticsFromData();
+		PickedOptionViewService pickedOptionViewService = new PickedOptionViewService(objectsListFromJSON, statisticsFromData);
+		MainViewService mainViewService = new MainViewService(pickedOptionViewService);
+		MainView mainView = new MainView(mainViewService);
+		List<Task> tasks = objectsListFromJSON.getTasksFromJSON("tasks_java.txt");
+		List<WorkLog> workLogs = objectsListFromJSON.getWorkLogsFromJSON("worklogs_Java.txt");
+		mainView.initView(tasks, workLogs);
 	}
 
 }

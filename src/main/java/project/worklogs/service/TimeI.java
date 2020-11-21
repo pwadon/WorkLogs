@@ -18,12 +18,20 @@ public interface TimeI {
         }).map(WorkLog::getTimeLogged).reduce(0L, Long::sum);
     }
 
-    Long getTimeLoggedForChosenTask(List<Task> tasks, List<WorkLog> workLogs, Long taskId);
+    default Long timeLoggedForGivenTaskId(List<WorkLog> workLogs, Long taskId){
+        return workLogs.stream().filter(w -> w.getTaskID().equals(taskId)).map(WorkLog::getTimeLogged).reduce(0L, Long::sum);
+    }
+
+    default String taskCategoryforGivenTaskId(List<Task>tasks,Long taskId){
+        return tasks.stream().filter(t -> t.getId().equals(taskId)).map(Task::getCategory).reduce("",String::concat);
+    }
+
+    Long getTimeLoggedForChosenTaskWithSubtasks(List<Task> tasks, List<WorkLog> workLogs, Long taskId);
 
     Long getTimeLoggedForChosenProject(List<Task> tasks, List<WorkLog> workLogs, String project);
 
     Long getTimeLoggedForChosenUser(List<WorkLog> workLogs, String project);
 
-    Map<Task,Map<String, Long>> getTimeLoggedForEpicWithSubProjects(List<Task> tasks, List<WorkLog> workLogs, Long taskId);
+    Map<String, Long> getTimeLoggedForEpicWithSubProjects(List<Task> tasks, List<WorkLog> workLogs, Long taskId);
 
 }

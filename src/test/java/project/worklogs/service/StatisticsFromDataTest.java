@@ -19,8 +19,8 @@ class StatisticsFromDataTest {
 
 
     @Test
-    void getTimeLoggedForChosenTaskTest() {
-        Long timeForChosenTask = statisticsFromData.getTimeLoggedForChosenTask(tasks,workLogs,66L);
+    void getTimeLoggedForChosenTaskWithSubtasksTest() {
+        Long timeForChosenTask = statisticsFromData.getTimeLoggedForChosenTaskWithSubtasks(tasks,workLogs,66L);
         assertEquals(19L,timeForChosenTask);
     }
 
@@ -50,6 +50,12 @@ class StatisticsFromDataTest {
     void getTimeLoggedForChosenUserTest() {
         Long timeLoggedForUser = statisticsFromData.getTimeLoggedForChosenUser(workLogs,"STANIS\\u0141AW");
         assertEquals(16,timeLoggedForUser);
+    }
+
+    @Test
+    void getTimeLoggedForChosenTaskTest() {
+        Long timeLoggedForTask = statisticsFromData.getTimeLoggedForChosenTask(workLogs,1L);
+        assertEquals(1L,timeLoggedForTask);
     }
 
     List<Task> createTasks(){
@@ -88,6 +94,4 @@ class StatisticsFromDataTest {
 
         return workLogs;
     }
-
-
 }
