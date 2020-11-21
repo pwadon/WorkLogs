@@ -14,7 +14,6 @@ import java.util.List;
 @SpringBootApplication
 public class WorklogsApplication {
 
-
 	public static void main(String[] args) {
 		ObjectsListFromJSON objectsListFromJSON = new ObjectsListFromJSON();
 		StatisticsFromData statisticsFromData = new StatisticsFromData();
@@ -25,7 +24,6 @@ public class WorklogsApplication {
 		List<WorkLog> workLogs = objectsListFromJSON.getWorkLogsFromJSON("worklogs_Java.txt");
 		mainView.initView(tasks, workLogs);
 	}
-
 }
 
 
