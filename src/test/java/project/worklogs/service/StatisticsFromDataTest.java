@@ -43,6 +43,7 @@ class StatisticsFromDataTest {
         Map<String,Long> testMap = new HashMap<>();
         testMap.put("B",3L);
         testMap.put("C",10L);
+        testMap.put("x",3L);
         assertEquals(testMap,numberOfTasksForChosenProject);
     }
 
@@ -56,6 +57,18 @@ class StatisticsFromDataTest {
     void getTimeLoggedForChosenTaskTest() {
         Long timeLoggedForTask = statisticsFromData.getTimeLoggedForChosenTask(workLogs,1L);
         assertEquals(1L,timeLoggedForTask);
+    }
+
+    @Test
+    void getTimeLoggedForTaskDividedByDays(){
+        Map<String,Long> map = statisticsFromData.getTimeLoggedForTaskDividedByDays(tasks,workLogs,70L);
+
+        Map<String,Long> testMap = new HashMap<>();
+        testMap.put("23-09-2020",3L);
+        testMap.put("08-09-2020",1L);
+
+        assertEquals(testMap,map);
+
     }
 
     List<Task> createTasks(){
@@ -73,14 +86,18 @@ class StatisticsFromDataTest {
         tasks.add(new Task("Story",11L,"C",11L));
         tasks.add(new Task("Story",12L,"C",1L));
         tasks.add(new Task("Story",66L,"C",-1L));
+        tasks.add(new Task("Story",70L,"x",-1L));
+        tasks.add(new Task("Story",71L,"x",70L));
+        tasks.add(new Task("Story",72L,"x",70L));
+
         return tasks;
     }
 
     List<WorkLog> createWorklogs(){
         List<WorkLog> workLogs = new ArrayList<>();
-        workLogs.add(new WorkLog("Anna",1L,2L,1L));
-        workLogs.add(new WorkLog("STANIS\\u0141AW",1L,2L,2L));
-        workLogs.add(new WorkLog("STANIS\\u0141AW",2L,2L,3L));
+        workLogs.add(new WorkLog("Anna",1L,1600846446882L,1L));
+        workLogs.add(new WorkLog("STANIS\\u0141AW",1L,1599546786614L,2L));
+        workLogs.add(new WorkLog("STANIS\\u0141AW",2L,1600846446885L,3L));
         workLogs.add(new WorkLog("Anna",3L,2L,4L));
         workLogs.add(new WorkLog("Anna",1L,2L,5L));
         workLogs.add(new WorkLog("Wojtek",1L,2L,6L));
@@ -91,6 +108,9 @@ class StatisticsFromDataTest {
         workLogs.add(new WorkLog("Anna",1L,2L,11L));
         workLogs.add(new WorkLog("Anna",1L,2L,12L));
         workLogs.add(new WorkLog("STANIS\\u0141AW",11L,2L,66L));
+        workLogs.add(new WorkLog("Artur",1L,1600846446882L,70L));
+        workLogs.add(new WorkLog("Artur",1L,1599546786614L,71L));
+        workLogs.add(new WorkLog("Artur",2L,1600846446885L,72L));
 
         return workLogs;
     }

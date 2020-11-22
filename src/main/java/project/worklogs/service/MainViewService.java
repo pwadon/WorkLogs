@@ -84,6 +84,9 @@ public class MainViewService {
                     break;
                 case 1:
                     runPickStatistic(tasks, workLogs);
+                default:
+                    System.out.println("there is no such option, pick again.");
+                    runPickStatistic(tasks,workLogs);
             }
         }
     }

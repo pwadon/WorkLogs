@@ -4,10 +4,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import project.worklogs.controller.MainView;
 import project.worklogs.model.Task;
 import project.worklogs.model.WorkLog;
-import project.worklogs.service.MainViewService;
-import project.worklogs.service.ObjectsListFromJSON;
-import project.worklogs.service.PickedOptionViewService;
-import project.worklogs.service.StatisticsFromData;
+import project.worklogs.service.*;
 
 import java.util.List;
 
