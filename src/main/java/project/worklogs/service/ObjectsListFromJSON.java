@@ -19,11 +19,9 @@ public class ObjectsListFromJSON  implements ObjectsListFromJSONI {
     @Override
     public List<Task> getTasksFromJSON(String pathToFile){
         List<Task> ts = new ArrayList<>();
-        try {
+        try(InputStream input = new FileInputStream(new File(pathToFile))) {
             ObjectMapper mapper = new ObjectMapper();
-            InputStream input = new FileInputStream(new File(pathToFile));
-            TypeReference<List<Task>> typeReference = new TypeReference<>() {
-            };
+            TypeReference<List<Task>> typeReference = new TypeReference<>() {};
              ts = mapper.readValue(input, typeReference);
         }catch (IOException iOException){
             iOException.printStackTrace();
@@ -34,11 +32,9 @@ public class ObjectsListFromJSON  implements ObjectsListFromJSONI {
     @Override
     public List<WorkLog> getWorkLogsFromJSON(String pathToFile){
         List<WorkLog> ts = new ArrayList<>();
-        try {
+        try(InputStream input = new FileInputStream(new File(pathToFile))){
             ObjectMapper mapper = new ObjectMapper();
-            InputStream input = new FileInputStream(new File(pathToFile));
-            TypeReference<List<WorkLog>> typeReference = new TypeReference<>() {
-            };
+            TypeReference<List<WorkLog>> typeReference = new TypeReference<>() {};
             ts = mapper.readValue(input, typeReference);
         }catch (IOException iOException){
             iOException.printStackTrace();

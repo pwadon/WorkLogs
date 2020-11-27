@@ -9,6 +9,4 @@ public interface ObjectsListFromJSONI {
 
       List<Task> getTasksFromJSON(String pathToFile) throws IOException;
       List<WorkLog> getWorkLogsFromJSON(String pathToFile) throws IOException;
-
-
 }
